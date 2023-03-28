@@ -2,8 +2,8 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - A Pen by Jonathan</title>
-  <link rel="stylesheet" href="./style.css">
+  <title>Flash Card game</title>
+  <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -12,14 +12,14 @@
   <div class="card">
     <div class="card_front">
       <div class="card-text">
-        <p>text original</p>
+        <p>{{ word.word }}</p>
       </div>
 
     </div>
 
     <div class="card_back">
       <div class="card-text">
-        <p>Solucion</p>
+        <p>{{ word.word_translation }}</p>
       </div>
     </div>
 
