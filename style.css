@@ -1,0 +1,106 @@
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: black;
+}
+
+/* CARD STYLING */
+
+.container,
+.card,
+.card_front,
+.card_back {
+  width: 397px;
+  height: 640px;
+  margin: 3em auto;  
+}
+
+.card_front {  
+/*   height: 100%; */
+  background: url('https://image.stern.de/9187882/t/3k/v3/w1440/r1.7778/-/emmanuel-macron-coronavirus.jpg') ;
+  background-size: 400px 220px;
+  box-shadow: 0px 5px 25px 0px rgba(51,51,51,0.28); 
+}
+.card_back {  
+/*   height: 100%; */
+  background: url('https://i.pinimg.com/originals/86/32/9f/86329fb4ee1f5a3237483b57633764d3.jpg')  ;
+  background-size: 400px 220px;
+  box-shadow: 0px 5px 25px 0px rgba(51,51,51,0.28); 
+}
+
+
+@supports(display:flex){
+ .card_front, .card_back {  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } 
+  
+  .card_front .card-symbol {  
+    margin: 0 0.15em;
+    border-radius: 50%;
+    font-size: 15em;  
+  }
+}
+
+.card_front {
+  position: relative;
+  padding: 0 1em;
+}
+
+
+.card_front > * {
+  background-color: rgba(255, 255, 255, 0.75);  
+}
+.card_back > * {
+  background-color: rgba(100, 200, 44, 0.55);  
+}
+
+.card-text {
+  padding: 0 4.5em 1em;
+  line-height: 1.4;
+}
+
+p {    
+  margin-top: 0;
+  padding: 1.5em 0 0;
+  border-top: 8px solid #333;
+}
+
+/* FLIP CARD STYLING */
+.container {
+  perspective: 1000px;
+}
+
+.container:hover .card, 
+.container.hover {
+  transform: rotateY(-180deg);
+}
+
+.card {
+  transition: 1.9s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card_front,
+.card_back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card_front {
+  transform: rotateY(0deg);
+}
+
+.card_back {
+  transform: rotateY(-180deg);
+}
