@@ -19,91 +19,23 @@ class Words(db.Model):
     word_translation = db.Column(db.String, unique=False, nullable=False)
 
 
+@app.route("/get-words", methods=['GET'])
+def get_word():
+    with app.app_context():
+        posts = Words.query.all()
+    word=posts[randint(0, len(posts)-1)]
+    answer = { "word" : word.word,
+        "word_translation" : word.word_translation
+    }
+    return answer
 
-#Create DB if does not exist TO COMMENT
-#with app.app_context():
-#     db.create_all()
-#     new_word = Words(word="toto", word_translation="titi")
-#     db.session.add(new_word)
-#     db.session.commit()
 
-with app.app_context():
-    posts = Words.query.all()
-       
 @app.route('/')
 def run_game():
     # return index template with a random word from the db from posts list 
-    return render_template("index.html", word=posts[randint(0, len(posts)-1)])
-#
-#
-###WTForm
-#class CreatePostForm(FlaskForm):
-#    title = StringField("Blog Post Title", validators=[DataRequired()])
-#    subtitle = StringField("Subtitle", validators=[DataRequired()])
-#    author = StringField("Your Name", validators=[DataRequired()])
-#    img_url = StringField("Blog Image URL", validators=[DataRequired(), URL()])
-#    body = CKEditorField("Blog Content", validators=[DataRequired()])
-#    # body = StringField("Blog Content", validators=[DataRequired()])
-#    submit = SubmitField("Submit Post")
-#
-#posts = BlogPost.query.all()
-#
-#
-#
-#
-#@app.route("/post/<int:index>")
-#def show_post(index):
-#    requested_post = None
-#    for blog_post in posts:
-#        if blog_post.id == index:
-#            requested_post = blog_post
-#            print(requested_post)
-#    return render_template("post.html", post=requested_post)
-#
-#
-#@app.route("/about")
-#def about():
-#    return render_template("about.html")
-#
-#
-#@app.route("/contact")
-#def contact():
-#    return render_template("contact.html")
-#
-#
-#@app.route("/new-post", methods=['GET', 'POST'])
-#def create_new_post():
-#    form = CreatePostForm()
-#    if form.validate_on_submit():
-#        new_post = BlogPost(
-#            title=form.title.data,
-#            subtitle=form.subtitle.data,
-#            date=datetime.datetime.now(),
-#            body=form.body.data,
-#            author=form.author.data,
-#            img_url=form.img_url.data
-#        )
-#        db.session.add(new_post)
-#        db.session.commit()
-#    return render_template("make-post.html", form=form, is_a_new_post=True)
-#
-#
-#@app.route("/edit-post/<post_id>")
-#def edit_post():
-#    if form.validate_on_submit():
-#        new_post = BlogPost(
-#            title=form.title.data,
-#            subtitle=form.subtitle.data,
-#            date=datetime.datetime.now(),
-#            body=form.body.data,
-#            author=form.author.data,
-#            img_url=form.img_url.data
-#        )
-#        db.session.add(new_post)
-#        db.session.commit()
-#    return render_template("make-post.html", form=form, is_a_new_post=False, post_name="tobeUpdate")
-
+    return render_template("index.html", word=get_word())
 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+
