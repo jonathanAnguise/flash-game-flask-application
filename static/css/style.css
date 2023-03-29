@@ -79,7 +79,7 @@ p {
 }
 
 .container:hover .card, 
-.container.hover {
+.no-touch .container.hover {
   transform: rotateY(-180deg);
 }
 
