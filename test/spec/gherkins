@@ -1,0 +1,13 @@
+Feature: Use the flash card game
+
+Scenario: As a User I can see the answer by hoovering the card
+Given I'm on the web app
+And I see the word to translate on the card
+When I'm hoovering with the mouse the card
+Then I can see the translation of the word
+
+
+Scenario: As a User when I click on 'New Word!' button, the app shows me a new flash card
+Given I'm on the web app
+When I click on the button 'New Word!'
+Then a new card is created and I can see new words
